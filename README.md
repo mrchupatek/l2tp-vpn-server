@@ -11,9 +11,10 @@ docker-compose up -d
 ```
 
 # Добавление пользователей
-
+```
 docker exec vpn-server  add_users.sh 'username_to_add' 'password'
-
+```
 # Удаление пользователей
-
+```
 docker exec vpn-server del_users.sh 'username_to_delete'
+```
