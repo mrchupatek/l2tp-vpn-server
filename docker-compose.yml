@@ -2,7 +2,7 @@ version: '3'
 
 services:
   vpn:
-    image: pandora/vpn_l2tp:0.6
+    image: mrchupatek/vpn_l2tp_ipsec:0.1
     restart: always
     ports:
       - "500:500/udp"
