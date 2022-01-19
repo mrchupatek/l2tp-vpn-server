@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  vpn:
+    image: pandora/vpn_l2tp:0.6
+    restart: always
+    ports:
+      - "500:500/udp"
+      - "4500:4500/udp"
+    volumes:
+       - /lib/modules:/lib/modules:ro
+    privileged: true
+#    entrypoint: bash -c "tail -f /dev/null"
+    entrypoint: bash -c "/opt/src/vpnsetup.sh && tail -f /dev/null"
+    hostname: vpn-server
+    container_name: vpn-server
