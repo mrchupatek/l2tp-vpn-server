@@ -24,8 +24,6 @@
 # - All values MUST be placed inside 'single quotes'
 # - DO NOT use these special characters within values: \ " '
 
-#PSK=$(sha256sum<<<$(curl -s ifconfig.co) | awk '{print$1}')
-
 YOUR_IPSEC_PSK=''
 YOUR_USERNAME=''
 YOUR_PASSWORD=''
@@ -114,12 +112,13 @@ check_creds() {
 
   if [ -z "$VPN_IPSEC_PSK" ] && [ -z "$VPN_USER" ] && [ -z "$VPN_PASSWORD" ]; then
     bigecho "VPN credentials not set by user. Generating random PSK and password..."
-    VPN_IPSEC_PSK=$(LC_CTYPE=C tr -dc 'A-HJ-NPR-Za-km-z2-9' </dev/urandom 2>/dev/null | head -c 20)
+    VPN_IPSEC_PSK=$(sha256sum<<<$(curl -s ifconfig.co) | awk '{print$1}' | md5sum | awk '{print$1}')
     VPN_USER=vpnuser
     VPN_PASSWORD=$(LC_CTYPE=C tr -dc 'A-HJ-NPR-Za-km-z2-9' </dev/urandom 2>/dev/null | head -c 16)
   fi
 
   if [ -z "$VPN_IPSEC_PSK" ] || [ -z "$VPN_USER" ] || [ -z "$VPN_PASSWORD" ]; then
+    echo $VPN_IPSEC_PSK
     exiterr "All VPN credentials must be specified. Edit the script and re-enter them."
   fi
 
@@ -199,7 +198,7 @@ install_vpn_pkgs() {
   bigecho "Installing packages required for the VPN..."
   (
     set -x
-    apt-get -yqq install libnss3-dev curl libnspr4-dev pkg-config \
+    apt-get -yqq install libnss3-dev libnspr4-dev pkg-config \
       libpam0g-dev libcap-ng-dev libcap-ng-utils libselinux1-dev \
       libcurl4-nss-dev flex bison gcc make libnss3-tools \
       libevent-dev libsystemd-dev uuid-runtime ppp xl2tpd >/dev/null
