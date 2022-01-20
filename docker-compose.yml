@@ -2,7 +2,7 @@ version: '3'
 
 services:
   vpn:
-    image: mrchupatek/vpn_l2tp_ipsec:0.4
+    image: mrchupatek/vpn_l2tp_ipsec:0.5
     restart: always
     ports:
       - "500:500/udp"

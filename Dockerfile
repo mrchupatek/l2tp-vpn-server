@@ -15,6 +15,9 @@ RUN wget https://raw.githubusercontent.com/mrchupatek/l2tp-vpn-server/main/vpnse
 RUN chmod 755 /opt/src/vpnsetup.sh
 
 FROM debian:stable-slim
+RUN apt-get -yqq update \
+    && apt-get -yqq --no-install-recommends install curl \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 COPY --from=build /opt/src /opt/src
 EXPOSE 500/udp 4500/udp
-#VOLUME ["/lib/modules"]
