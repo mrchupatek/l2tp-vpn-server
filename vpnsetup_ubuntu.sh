@@ -24,9 +24,9 @@
 # - All values MUST be placed inside 'single quotes'
 # - DO NOT use these special characters within values: \ " '
 
-PSK=$(sha256sum<<<$(curl -s ifconfig.co) | awk '{print$1}')
+#PSK=$(sha256sum<<<$(curl -s ifconfig.co) | awk '{print$1}')
 
-YOUR_IPSEC_PSK=$PSK
+YOUR_IPSEC_PSK=''
 YOUR_USERNAME=''
 YOUR_PASSWORD=''
 
