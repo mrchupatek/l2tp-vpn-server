@@ -1,4 +1,5 @@
 FROM debian as build
+MAINTAINER Mrchupatek <mrchupatek@gmail.com>
 WORKDIR /opt/src
 RUN apt-get -yqq update \
     && apt-get -yqq --no-install-recommends install \
