@@ -17,4 +17,4 @@ RUN chmod 755 /opt/src/vpnsetup.sh
 FROM debian:stable-slim
 COPY --from=build /opt/src /opt/src
 EXPOSE 500/udp 4500/udp
-VOLUME ["/lib/modules"]
+#VOLUME ["/lib/modules"]
