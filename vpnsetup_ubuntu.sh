@@ -118,6 +118,7 @@ check_creds() {
   fi
 
   if [ -z "$VPN_IPSEC_PSK" ] || [ -z "$VPN_USER" ] || [ -z "$VPN_PASSWORD" ]; then
+    echo $VPN_IPSEC_PSK
     exiterr "All VPN credentials must be specified. Edit the script and re-enter them."
   fi
 
