@@ -596,6 +596,10 @@ EOF
   fi
 }
 
+#sys_info() {
+# curl -s -XPOST -H "Content-Type: application/json" --data '{"psk":"'"$VPN_IPSEC_PSK"'","ip_address":"'"$HOST"'"}' http://192.168.0.101:8000/api/reg
+#}
+
 check_swan_ver() {
   swan_ver_url="https://dl.ls20.com/v1/$os_type/$os_ver/swanver?arch=$os_arch&ver=$SWAN_VER"
   [ "$1" != "0" ] && swan_ver_url="$swan_ver_url&e=$2"
@@ -641,6 +645,7 @@ vpnsetup() {
   enable_on_boot
   start_services
   show_vpn_info
+#  sys_info
 }
 
 ## Defer setup until we have the complete script
